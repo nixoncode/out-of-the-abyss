@@ -6,17 +6,21 @@
 package cmd
 
 import (
+	"github.com/nixoncode/out-of-the-abyss/internal/api"
 	"github.com/spf13/cobra"
-	"log"
 )
 
 func NewServeCommand() *cobra.Command {
 	command := &cobra.Command{
 		Use:   "serve",
-		Short: "start the web server on localhost:8080",
+		Short: "start the web api on 0.0.0.0:8080",
 		Run: func(cmd *cobra.Command, args []string) {
-			// todo start the server
-			log.Println("server should run here")
+			server := api.New()
+
+			err := server.Start(8080)
+			if err != nil {
+				panic("failed to start api server")
+			}
 		},
 	}
 

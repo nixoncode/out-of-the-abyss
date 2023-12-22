@@ -172,3 +172,5 @@ Temporary Items
 
 # End of https://www.toptal.com/developers/gitignore/api/go,goland,macos
 
+# local build file from `go build`
+out-of-the-abyss

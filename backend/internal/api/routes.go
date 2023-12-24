@@ -11,7 +11,10 @@ import (
 )
 
 func (s *Server) RegisterHandlers() {
-	s.Handler.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
-	})
+	s.Handler.GET("/", s.Landing)
+	s.Handler.POST("/users/register", s.RegisterUser)
+}
+
+func (s *Server) Landing(ctx echo.Context) error {
+	return ctx.String(http.StatusOK, "Hello, World!")
 }

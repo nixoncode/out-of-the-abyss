@@ -8,18 +8,20 @@ package api
 import (
 	"fmt"
 	"github.com/labstack/echo/v4"
+	"github.com/nixoncode/out-of-the-abyss/internal/db/sqlc"
 )
 
 type Server struct {
-	port    int
 	Handler *echo.Echo
+	DB      *sqlc.Queries
 }
 
-func New() *Server {
+func New(db *sqlc.Queries) *Server {
 	e := echo.New()
 
 	return &Server{
 		Handler: e,
+		DB:      db,
 	}
 }
 

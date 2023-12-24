@@ -18,7 +18,7 @@ type App struct {
 }
 
 func (app *App) Start() error {
-	app.RootCmd.AddCommand(cmd.NewServeCommand())
+	app.RootCmd.AddCommand(cmd.NewServeCommand(app.DB))
 
 	return app.Execute()
 }

@@ -19,7 +19,7 @@ func NewServeCommand() *cobra.Command {
 
 			err := server.Start(8080)
 			if err != nil {
-				panic("failed to start api server")
+				panic(err)
 			}
 		},
 	}

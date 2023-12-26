@@ -1,9 +1,9 @@
-// Package api
+// Package users
 // Created by GoLand.
 // User: nixon
 // Date: 22/12/2023
 // Time: 20:03
-package api
+package users
 
 import (
 	"context"
@@ -13,7 +13,7 @@ import (
 	"net/http"
 )
 
-func (s *Server) RegisterUser(ctx echo.Context) error {
+func (u *Users) register(ctx echo.Context) error {
 	fmt.Println(ctx.FormValue("email"))
 	user := sqlc.CreateUserParams{}
 	err := ctx.Bind(&user)
@@ -21,13 +21,13 @@ func (s *Server) RegisterUser(ctx echo.Context) error {
 		return err
 	}
 
-	createUser, err := s.DB.CreateUser(context.Background(), user)
+	createUser, err := u.DB.CreateUser(context.Background(), user)
 	if err != nil {
 		return err
 	}
 	id, err := createUser.LastInsertId()
 
-	msg := fmt.Sprintf("user registered with ID: %d", id)
+	msg := fmt.Sprintf("users registered with ID: %d", id)
 
 	return ctx.String(http.StatusOK, msg)
 }

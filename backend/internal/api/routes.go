@@ -7,12 +7,15 @@ package api
 
 import (
 	"github.com/labstack/echo/v4"
+	"github.com/nixoncode/out-of-the-abyss/internal/core/users"
 	"net/http"
 )
 
 func (s *Server) RegisterHandlers() {
 	s.Handler.GET("/", s.Landing)
-	s.Handler.POST("/users/register", s.RegisterUser)
+
+	userHandlers := users.New(s.DB, s.Handler)
+	userHandlers.RegisterHandlers()
 }
 
 func (s *Server) Landing(ctx echo.Context) error {
